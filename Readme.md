@@ -12,13 +12,13 @@ mvn archetype:generate -DgroupId=andrevsc -DartifactId=java-maven-first-project 
 
 ### Explicação dos Parâmetros:
 
-- **`DgroupId`**: Especifica o ID do grupo para o projeto. No Maven, o ID do grupo é um identificador exclusivo para seu projeto, geralmente no formato de um domínio reverso (ex: `com.exemplo`).
+- **`-DgroupId`**: Especifica o ID do grupo para o projeto. No Maven, o ID do grupo é um identificador exclusivo para seu projeto, geralmente no formato de um domínio reverso (ex: `com.exemplo`).
 
-- **`DartifactId`**: Define o ID do artefato. Este é o nome do seu projeto. O Maven cria um diretório com esse nome para o seu projeto.
+- **`-DartifactId`**: Define o ID do artefato. Este é o nome do seu projeto. O Maven cria um diretório com esse nome para o seu projeto.
 
-- **`Darchetype`**: Indica o tipo de projeto que você deseja criar. O valor `maven-archetype-quickstart` é um arquétipo básico para começar um novo projeto Java.
+- **`-Darchetype`**: Indica o tipo de projeto que você deseja criar. O valor `maven-archetype-quickstart` é um arquétipo básico para começar um novo projeto Java.
 
-- **`DinteractiveMode=false`**: Desativa o modo interativo, permitindo que o Maven use os valores padrão fornecidos sem solicitar informações adicionais.
+- **`-DinteractiveMode=false`**: Desativa o modo interativo, permitindo que o Maven use os valores padrão fornecidos sem solicitar informações adicionais.
 
 ## Passo 2: Navegar para o Diretório do Projeto
 
@@ -28,7 +28,7 @@ Após executar o comando acima, o Maven criará um diretório chamado `java-mave
 cd java-maven-first-project
 ~~~~
 
-## Passo 3: Compilar e Executar o Projeto
+## Passo 3: Compilar o Projeto
 
 Para compilar o projeto, use o comando:
 
@@ -36,19 +36,49 @@ Para compilar o projeto, use o comando:
 mvn compile
 ~~~~
 
-Para executar o projeto, use o comando:
+Este comando compilará o código-fonte do projeto e gerará os arquivos `.class` correspondentes na pasta `target/classes`.
+
+## Passo 4: Empacotar o Projeto
+
+Depois de compilar o projeto, você pode empacotá-lo em um arquivo JAR usando o comando:
 
 ~~~~powershell
-mvn exec:java -Dexec.mainClass="com.example.App"
+mvn package
 ~~~~
 
-Certifique-se de substituir `com.example.App` pelo nome da classe principal do seu projeto.
+### O que o `mvn package` faz?
 
-## Passo 4: Adicionar Dependências
+O comando `mvn package` compila o código-fonte, executa os testes (se houver) e empacota o aplicativo em um arquivo JAR (ou WAR, dependendo do projeto). O arquivo gerado será encontrado na pasta `target`.
+
+Por exemplo, se o `artifactId` do seu projeto for `java-maven-first-project`, o Maven criará um arquivo chamado `java-maven-first-project-1.0-SNAPSHOT.jar` dentro da pasta `target`.
+
+## Passo 5: Limpar o Diretório de Compilação
+
+Para limpar o diretório de compilação (remover a pasta `target` e todos os arquivos gerados durante a compilação anterior), use o comando:
+
+~~~~powershell
+mvn clean
+~~~~
+
+### O que o `mvn clean` faz?
+
+O comando `mvn clean` remove todos os arquivos gerados pelo Maven durante a compilação, teste e empacotamento do projeto. Isso inclui a pasta `target` e todos os arquivos `.class`, arquivos JAR, e outros artefatos de construção. É útil quando você deseja iniciar uma nova compilação do zero.
+
+## Passo 6: Executar o JAR Gerado
+
+Após empacotar o projeto, você pode executar o arquivo JAR gerado com o seguinte comando:
+
+~~~~powershell
+java -jar target/java-maven-first-project-1.0-SNAPSHOT.jar
+~~~~
+
+Certifique-se de substituir o nome do arquivo JAR conforme necessário.
+
+## Passo 7: Adicionar Dependências
 
 Para adicionar dependências ao seu projeto, edite o arquivo `pom.xml` e adicione as dependências necessárias na seção `<dependencies>`.
 
-## Passo 5: Executar Testes
+## Passo 8: Executar Testes
 
 Para executar os testes incluídos no seu projeto, use o comando:
 
